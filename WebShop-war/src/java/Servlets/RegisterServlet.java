@@ -18,24 +18,25 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author jimmyjonsson
  */
-@WebServlet(name = "LoginServlet", urlPatterns = {"/LoginServlet"})
-public class LoginServlet extends HttpServlet {
+@WebServlet(name = "RegisterServlet", urlPatterns = {"/RegisterServlet"})
+public class RegisterServlet extends HttpServlet {
 
-    private void sendJSP (HttpServletRequest request, HttpServletResponse response, String name, String pword) 
-        throws ServletException, IOException{
+    private void sendJSP (HttpServletRequest request, HttpServletResponse response, String userName, String password, String
+           email, String creditCard) 
+        throws ServletException, IOException {
         
-        request.setAttribute("name", name);
-        request.setAttribute("pword", pword);
+        request.setAttribute("username", userName);
+        request.setAttribute("password", password);
+        request.setAttribute("email", email);
+        request.setAttribute("creditcard", creditCard);
         
-        RequestDispatcher rd = request.getRequestDispatcher("WebshopScreen.jsp");
+        RequestDispatcher rd = request.getRequestDispatcher("LoginScreen.jsp");
         rd.forward(request, response);
     }
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-        
-        
-    }
+       
+        }
     
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -52,14 +53,12 @@ public class LoginServlet extends HttpServlet {
             throws ServletException, IOException {
         processRequest(request, response);
         
+        String userName = request.getParameter("username");
+        String password = request.getParameter("password");
+        String email = request.getParameter("email");
+        String creditCard = request.getParameter("creditcard");
         
-        
-        String name = request.getParameter("name");
-        String pword = request.getParameter("pword");
-        
-        sendJSP(request, response, name, pword);
-        
-        
+        sendJSP(request, response, userName, password, email, creditCard);
     }
 
     /**
