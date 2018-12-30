@@ -6,24 +6,29 @@
 package DBHelperClasses;
 
 import DAOClass.DAOClass;
-import EntityClasses.OrderEntity;
+import EntityClasses.ItemEntity;
 
-
-public class OrderHandler {
+/**
+ *
+ * @author robin
+ */
+public class ItemHandler {
     DAOClass daoMethods;
 
-    public OrderHandler() {
-       daoMethods = new DAOClass();
+    public ItemHandler() {
+        daoMethods = new DAOClass();
     }
     
     
-    
-    public void createNewOrder(int orderID, String userName, int totalPrice, String address, String firstName, String surName) {
-        OrderEntity order = new OrderEntity(orderID,userName,totalPrice,address,firstName,surName);
+    public void addItemToOrder(int orderID, String name, int price) {
+        ItemEntity item = new ItemEntity(orderID,name,price);
         daoMethods.openSessionWithTransaction();
-        daoMethods.persist(order);
+        daoMethods.persist(item);
+        daoMethods.increaseAmountOrder(price,orderID);
         daoMethods.closeSessionWithTransaction();
     }
+    
+    
     
     
 }

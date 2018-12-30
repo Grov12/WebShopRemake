@@ -33,8 +33,8 @@ public class OrderEntity {
     @Column(name = "surname")
     private String surName;
 
-    public OrderEntity(String userName, int totalPrice, String address, String firstName, String surName) {
-        orderID = 6;
+    public OrderEntity(int orderID, String userName, int totalPrice, String address, String firstName, String surName) {
+        this.orderID = orderID;
         this.userName = userName;
         this.totalPrice = totalPrice;
         this.address = address;

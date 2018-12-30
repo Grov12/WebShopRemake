@@ -48,5 +48,6 @@ Contributor(s):
     <property name="hibernate.connection.password">robinlol!=</property>
     <mapping class="EntityClasses.UserEntity"/>
      <mapping class="EntityClasses.OrderEntity"/>
+     <mapping class="EntityClasses.ItemEntity"/>
   </session-factory>
 </hibernate-configuration>

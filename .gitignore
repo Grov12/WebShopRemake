@@ -1,2 +1,5 @@
 /WebShop-war/build/
 /WebShop-ejb/build/
+/build/
+/WebShop-ejb/dist/
+/WebShop-war/dist/

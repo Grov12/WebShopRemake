@@ -13,7 +13,8 @@ import java.util.Random;
 
 public class Tester {
      public static void main(String[] args) {
-    
-
+         UserHandler m = new UserHandler();
+         m.addPointsToUser("Fick");
+         
     }
 }

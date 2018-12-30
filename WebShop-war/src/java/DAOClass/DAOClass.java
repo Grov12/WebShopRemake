@@ -121,4 +121,15 @@ public class DAOClass implements ServiceInterface {
           }
             
     }
+    
+    
+    public void increaseAmountOrder(int price, int orderID){
+        Query query = session.createQuery("update OrderEntity set totalprice=totalprice +'" + price + "'where orderid='" + orderID + "'");
+        int result = query.executeUpdate();
+    }
+    
+    public void giveAPointToUser(String userName){
+        Query query = session.createQuery("update UserEntity set points=points +'" + 1 + "'where userName='" + userName + "'");
+        int result = query.executeUpdate();
+    }
 }

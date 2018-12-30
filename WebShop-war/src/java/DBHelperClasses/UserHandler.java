@@ -33,6 +33,12 @@ public class UserHandler {
             return checker;
     }
     
+     public void addPointsToUser(String username) {
+          daoMethods.openSessionWithTransaction();
+          daoMethods.giveAPointToUser(username);
+          daoMethods.closeSessionWithTransaction();
+    }
+    
     
     
 }
