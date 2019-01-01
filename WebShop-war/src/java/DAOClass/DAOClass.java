@@ -5,6 +5,7 @@
  */
 package DAOClass;
 
+import EntityClasses.ProductEntity;
 import HibernateInterface.ServiceInterface;
 import java.util.List;
 import org.hibernate.Query;
@@ -13,6 +14,7 @@ import org.hibernate.Transaction;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
+import org.hibernate.transform.Transformers;
 
 
 
@@ -131,5 +133,17 @@ public class DAOClass implements ServiceInterface {
     public void giveAPointToUser(String userName){
         Query query = session.createQuery("update UserEntity set points=points +'" + 1 + "'where userName='" + userName + "'");
         int result = query.executeUpdate();
+    }
+    
+    
+     public List getListOfProducts(){
+         Query q = session.createQuery("select e.articleID, e.name,e.price,e.quantity from ProductEntity e");
+         List<Object[]> listOfItems= (List<Object[]>)q.list();
+  
+        
+      
+        
+        
+        return listOfItems;
     }
 }

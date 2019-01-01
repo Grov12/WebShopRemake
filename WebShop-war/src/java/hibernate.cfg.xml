@@ -49,5 +49,6 @@ Contributor(s):
     <mapping class="EntityClasses.UserEntity"/>
      <mapping class="EntityClasses.OrderEntity"/>
      <mapping class="EntityClasses.ItemEntity"/>
+     <mapping class="EntityClasses.ProductEntity"/>
   </session-factory>
 </hibernate-configuration>

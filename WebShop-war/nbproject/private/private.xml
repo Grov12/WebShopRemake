@@ -2,6 +2,24 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/C:/Users/robin/Documents/NetBeansProjects/WebShop/WebShop-war/src/java/Servlets/RegisterServlet.java</file>
+            <file>file:/C:/Users/robin/Documents/NetBeansProjects/WebShop/WebShop-war/web/WEB-INF/web.xml</file>
+            <file>file:/C:/Users/robin/Documents/NetBeansProjects/WebShop/WebShop-war/src/java/EntityClasses/ProductEntity.java</file>
+            <file>file:/C:/Users/robin/Documents/NetBeansProjects/WebShop/WebShop-war/src/java/DBHelperClasses/OrderHandler.java</file>
+            <file>file:/C:/Users/robin/Documents/NetBeansProjects/WebShop/WebShop-war/src/java/Servlets/LoginServlet.java</file>
+            <file>file:/C:/Users/robin/Documents/NetBeansProjects/WebShop/WebShop-war/src/java/DBHelperClasses/ProductHandler.java</file>
+            <file>file:/C:/Users/robin/Documents/NetBeansProjects/WebShop/WebShop-war/web/LoginScreen.jsp</file>
+            <file>file:/C:/Users/robin/Documents/NetBeansProjects/WebShop/WebShop-war/src/java/EntityClasses/UserEntity.java</file>
+            <file>file:/C:/Users/robin/Documents/NetBeansProjects/WebShop/WebShop-war/src/java/EntityClasses/OrderEntity.java</file>
+            <file>file:/C:/Users/robin/Documents/NetBeansProjects/WebShop/WebShop-war/web/RegisterScreen.jsp</file>
+            <file>file:/C:/Users/robin/Documents/NetBeansProjects/WebShop/WebShop-war/web/WebshopScreen.jsp</file>
+            <file>file:/C:/Users/robin/Documents/NetBeansProjects/WebShop/WebShop-war/src/java/hibernate.cfg.xml</file>
+            <file>file:/C:/Users/robin/Documents/NetBeansProjects/WebShop/WebShop-war/nbproject/build-impl.xml</file>
+            <file>file:/C:/Users/robin/Documents/NetBeansProjects/WebShop/WebShop-war/src/java/DBHelperClasses/Tester.java</file>
+            <file>file:/C:/Users/robin/Documents/NetBeansProjects/WebShop/WebShop-war/src/java/DAOClass/DAOClass.java</file>
+            <file>file:/C:/Users/robin/Documents/NetBeansProjects/WebShop/WebShop-war/web/index.html</file>
+            <file>file:/C:/Users/robin/Documents/NetBeansProjects/WebShop/WebShop-war/src/java/DBHelperClasses/ItemHandler.java</file>
+        </group>
     </open-files>
 </project-private>
