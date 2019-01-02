@@ -5,8 +5,11 @@
  */
 package Servlets;
 
+import DBHelperClasses.ProductHandler;
+import DBHelperClasses.UserHandler;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -17,13 +20,22 @@ import javax.servlet.http.HttpServletResponse;
 
 @WebServlet(name = "LoginServlet", urlPatterns = {"/LoginServlet"})
 public class LoginServlet extends HttpServlet {
+    
+    UserHandler handle = new UserHandler();
+    ProductHandler m = new ProductHandler();
 
     private void sendJSP (HttpServletRequest request, HttpServletResponse response, String name, String pword) 
         throws ServletException, IOException{
         
-        request.setAttribute("name", name);
-        request.setAttribute("pword", pword);
         
+        request.setAttribute("name", name); //not necessary
+        request.setAttribute("pword", pword); //Not necessary
+        
+        /*List<Object[]> k =  m.getListOfProducts();
+        for(Object[] list: k){
+         System.out.println(list[1] + " " + list[2] + " " + list[3]);
+        }
+        */
         RequestDispatcher rd = request.getRequestDispatcher("WebshopScreen.jsp");
         rd.forward(request, response);
     }
@@ -53,6 +65,8 @@ public class LoginServlet extends HttpServlet {
         
         String name = request.getParameter("name");
         String pword = request.getParameter("pword");
+        
+        handle.authorizeLogin(name, pword);
         
         sendJSP(request, response, name, pword);
         
