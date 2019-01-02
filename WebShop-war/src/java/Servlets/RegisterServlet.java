@@ -5,6 +5,7 @@
  */
 package Servlets;
 
+import DBHelperClasses.UserHandler;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
@@ -20,15 +21,18 @@ import javax.servlet.http.HttpServletResponse;
  */
 @WebServlet(name = "RegisterServlet", urlPatterns = {"/RegisterServlet"})
 public class RegisterServlet extends HttpServlet {
+    
+    UserHandler handle = new UserHandler();
 
-    private void sendJSP (HttpServletRequest request, HttpServletResponse response, String userName, String password, String
-           email, String creditCard) 
+    private void sendJSP (HttpServletRequest request, HttpServletResponse response, String userName, String password) 
         throws ServletException, IOException {
         
         request.setAttribute("username", userName);
         request.setAttribute("password", password);
-        request.setAttribute("email", email);
-        request.setAttribute("creditcard", creditCard);
+        //request.setAttribute("email", email);
+        //request.setAttribute("creditcard", creditCard);
+        
+        
         
         RequestDispatcher rd = request.getRequestDispatcher("LoginScreen.jsp");
         rd.forward(request, response);
@@ -55,10 +59,12 @@ public class RegisterServlet extends HttpServlet {
         
         String userName = request.getParameter("username");
         String password = request.getParameter("password");
-        String email = request.getParameter("email");
-        String creditCard = request.getParameter("creditcard");
+        //String email = request.getParameter("email");
+        //String creditCard = request.getParameter("creditcard");
         
-        sendJSP(request, response, userName, password, email, creditCard);
+        handle.createNewUser(userName, password);
+        
+        sendJSP(request, response, userName, password);
     }
 
     /**
