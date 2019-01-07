@@ -111,10 +111,9 @@ public class DAOClass implements ServiceInterface {
     public boolean checkPass(String id, String password) {
           String hql = "SELECT password from UserEntity where userName='" + id +"'";
           Query query = session.createQuery(hql);
-          List list = query.list();
-          String pass = list.toString().replaceAll("\\[", "").replaceAll("\\]","");
-          
-       
+          String pass = (String) query.uniqueResult();
+        
+      
           if(pass.equals(password)) {
               return true;
           }
@@ -145,5 +144,28 @@ public class DAOClass implements ServiceInterface {
         
         
         return listOfItems;
+    }
+      public void decreaseQuantityFromProducts(String name){
+        Query query = session.createQuery("update ProductEntity set quantity=GREATEST(quantity-1,0) where name='" + name + "'");
+        int result = query.executeUpdate();
+        System.out.println("Result " + result);
+    }
+      
+      
+      public boolean checkIfPossible(String name){
+        Query query = session.createQuery("SELECT quantity from ProductEntity where name='" + name +"'");
+        int m = (int) query.uniqueResult();
+       
+        System.out.println(m);
+        
+        if(m > 0) {
+            return true;
+        }
+        
+        else {
+            return false;
+        }
+        
+     
     }
 }

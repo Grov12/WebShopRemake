@@ -17,7 +17,7 @@ public class OrderHandler {
     }
     
     
-    
+    //create random index number for the order.
     public void createNewOrder(int orderID, String userName, int totalPrice, String address, String firstName, String surName) {
         OrderEntity order = new OrderEntity(orderID,userName,totalPrice,address,firstName,surName);
         daoMethods.openSessionWithTransaction();
