@@ -28,14 +28,15 @@ public class LoginServlet extends HttpServlet {
         throws ServletException, IOException{
         
         
-        request.setAttribute("name", name); //not necessary
-        request.setAttribute("pword", pword); //Not necessary
+        //request.setAttribute("name", name); //not necessary
+        //request.setAttribute("pword", pword); //Not necessary
         
-        /*List<Object[]> k =  m.getListOfProducts();
-        for(Object[] list: k){
-         System.out.println(list[1] + " " + list[2] + " " + list[3]);
-        }
-        */
+        List<Object[]> k =  m.getListOfProducts();
+        
+         //System.out.println(list[1] + " " + list[2] + " " + list[3]);
+         request.setAttribute("data",k);
+        
+        
         RequestDispatcher rd = request.getRequestDispatcher("WebshopScreen.jsp");
         rd.forward(request, response);
     }
