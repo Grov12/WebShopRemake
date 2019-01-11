@@ -39,6 +39,15 @@ public class RegisterServlet extends HttpServlet {
     }
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
+        String userName = request.getParameter("username");
+        String password = request.getParameter("password");
+        //String email = request.getParameter("email");
+        //String creditCard = request.getParameter("creditcard");
+        
+        handle.createNewUser(userName, password);
+        
+        sendJSP(request, response, userName, password);
        
         }
     
@@ -57,14 +66,7 @@ public class RegisterServlet extends HttpServlet {
             throws ServletException, IOException {
         processRequest(request, response);
         
-        String userName = request.getParameter("username");
-        String password = request.getParameter("password");
-        //String email = request.getParameter("email");
-        //String creditCard = request.getParameter("creditcard");
         
-        handle.createNewUser(userName, password);
-        
-        sendJSP(request, response, userName, password);
     }
 
     /**

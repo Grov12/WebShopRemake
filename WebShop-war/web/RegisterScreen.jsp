@@ -12,7 +12,7 @@
         <title>Create account</title>
     </head>
     <body>
-        <form action="LoginServlet" method="GET">
+        
         
         
         <h2>Please specify the following down below</h2><br>

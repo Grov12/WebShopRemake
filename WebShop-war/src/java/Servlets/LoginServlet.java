@@ -43,6 +43,19 @@ public class LoginServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
+        String name = request.getParameter("name");
+        String pword = request.getParameter("pword");
+        
+        boolean check = handle.authorizeLogin(name, pword);
+        
+        if(check == true){
+            sendJSP(request, response, name, pword);
+        }else{
+            RequestDispatcher rd = request.getRequestDispatcher("LoginScreen.jsp");
+        rd.forward(request, response);
+            
+        }
+        
         
         
     }
@@ -64,12 +77,7 @@ public class LoginServlet extends HttpServlet {
         
         
         
-        String name = request.getParameter("name");
-        String pword = request.getParameter("pword");
         
-        handle.authorizeLogin(name, pword);
-        
-        sendJSP(request, response, name, pword);
         
         
     }

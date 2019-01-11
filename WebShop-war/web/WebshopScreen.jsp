@@ -32,10 +32,10 @@
              <td>${e.price}</td>
              <td>${e.quantity}</td>
              <td>
-                <a href="editProduct?code=${product.code}">TODO</a>
+                
              </td>
              <td>
-                <a href="deleteProduct?code=${e.articleID}">BUY</a>
+                <a href="buyProduct?code=${e.articleID}">BUY</a>
              </td>
           </tr>
        </c:forEach>
