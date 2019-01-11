@@ -19,35 +19,16 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author jimmyjonsson
  */
-@WebServlet(name = "RegisterServlet", urlPatterns = {"/RegisterServlet"})
+@WebServlet(name = "RegisterServlet", urlPatterns = {"/RegisterScreen"})
 public class RegisterServlet extends HttpServlet {
     
     UserHandler handle = new UserHandler();
 
-    private void sendJSP (HttpServletRequest request, HttpServletResponse response, String userName, String password) 
-        throws ServletException, IOException {
-        
-        request.setAttribute("username", userName);
-        request.setAttribute("password", password);
-        //request.setAttribute("email", email);
-        //request.setAttribute("creditcard", creditCard);
-        
-        
-        
-        RequestDispatcher rd = request.getRequestDispatcher("LoginScreen.jsp");
-        rd.forward(request, response);
-    }
+    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-        String userName = request.getParameter("username");
-        String password = request.getParameter("password");
-        //String email = request.getParameter("email");
-        //String creditCard = request.getParameter("creditcard");
         
-        handle.createNewUser(userName, password);
-        
-        sendJSP(request, response, userName, password);
        
         }
     
@@ -64,7 +45,8 @@ public class RegisterServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        
+        
         
         
     }
@@ -80,7 +62,15 @@ public class RegisterServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        String userName = request.getParameter("username");
+        String password = request.getParameter("password");
+        //String email = request.getParameter("email");
+        //String creditCard = request.getParameter("creditcard");
+        
+        handle.createNewUser(userName, password);
+        
+        RequestDispatcher rd = request.getRequestDispatcher("LoginScreen.jsp");
+        rd.forward(request, response);
     }
 
     /**

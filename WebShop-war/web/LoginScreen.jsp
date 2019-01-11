@@ -17,11 +17,11 @@
             <b> Username: <input type="text" name="name"/></b><br><br>
             <b>Password:  <input type="text" name="pword"/> </b><<br> <br><br>
 
-            <input type="submit" value="Register" />
+            <input type="submit" value="Login in" />
             
             <br><br>
             
-            <input type="submit" value="Create account" /> //TODO
+            <a href="RegisterServlet" >Create Account</a>
             
     </body>
 </html>

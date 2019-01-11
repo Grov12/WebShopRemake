@@ -18,9 +18,8 @@
         <h2>Please specify the following down below</h2><br>
             <b> Userame: </b>  <input name="username" type="text"> <br><br>
             <b> Password </b>  <input name="password" type="text"> <br><br>
-            <b> Email: </b> <input name="size" type="email"> <br><br>
             
-            <b>Credit Card No:  <input type="text" name="creditcard"/> </b><<br> <br><br>
+            
 
             <input type="submit" value="Create Account" />
 
