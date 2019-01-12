@@ -40,6 +40,9 @@
           </tr>
        </c:forEach>
     </table>
+    
+    
+    <h2> Logged in as:  ${name}    </h2>
  
     </body>
 </html>

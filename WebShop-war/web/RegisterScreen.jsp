@@ -14,14 +14,14 @@
     <body>
         
         
-        
-        <h2>Please specify the following down below</h2><br>
-            <b> Userame: </b>  <input name="username" type="text"> <br><br>
+    <form method="POST" action="${pageContext.request.contextPath}/RegisterServlet">
+        <h2>Please specify the following down below to register</h2><br>
+            <b> Username: </b>  <input name="username" type="text"> <br><br>
             <b> Password </b>  <input name="password" type="text"> <br><br>
             
             
 
             <input type="submit" value="Create Account" />
-
+    </form>
     </body>
 </html>

@@ -24,11 +24,11 @@ public class LoginServlet extends HttpServlet {
     UserHandler handle = new UserHandler();
     ProductHandler m = new ProductHandler();
 
-    private void sendJSP (HttpServletRequest request, HttpServletResponse response) 
+    private void sendJSP (HttpServletRequest request, HttpServletResponse response, String name) 
         throws ServletException, IOException{
         
         
-        //request.setAttribute("name", name); //not necessary
+        request.setAttribute("name", name); 
         //request.setAttribute("pword", pword); //Not necessary
         
         List<Object[]> k =  m.getListOfProducts();
@@ -64,29 +64,37 @@ public class LoginServlet extends HttpServlet {
             throws ServletException, IOException {
         String name = request.getParameter("name");
         String pword = request.getParameter("pword");
+        String errorMsg = "";
+        boolean error = false;
         
         
         boolean checker = handle.authorizeLogin(name, pword);
         
+        
+        
+        if (name == null || pword == null || name.length() == 0 || pword.length() == 0) {
+            error = true;
+            errorMsg = "Username and password is required";
+            System.out.println(errorMsg);
+        }
+        
+        
+        
+        
+        if(error){
+        RequestDispatcher rd = request.getRequestDispatcher("LoginScreen.jsp");
+        rd.forward(request, response);
+        }
+        
         if(checker == true){
-            sendJSP(request, response);
+            sendJSP(request, response, name);
         }else{
             RequestDispatcher rd = request.getRequestDispatcher("LoginScreen.jsp");
         rd.forward(request, response);
             
         }
         
-        if(name.equalsIgnoreCase("null") && pword.equalsIgnoreCase("null")){
-            try{
-        
-        RequestDispatcher rd = request.getRequestDispatcher("WebshopScreen.jsp");
-        rd.forward(request, response);
-            }catch (NullPointerException e){
-               System.out.println("Login fields are empty. Try again!"); 
-               RequestDispatcher rd = request.getRequestDispatcher("LoginScreen.jsp");
-               rd.forward(request, response);
-                
-            }
+            
         
             
         }
@@ -96,7 +104,7 @@ public class LoginServlet extends HttpServlet {
         
         
         
-    }
+    
 
     /**
      * Handles the HTTP <code>POST</code> method.

@@ -19,8 +19,9 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author jimmyjonsson
  */
-@WebServlet(name = "RegisterServlet", urlPatterns = {"/RegisterScreen"})
+@WebServlet(name = "RegisterServlet", urlPatterns = {"/RegisterServlet"})
 public class RegisterServlet extends HttpServlet {
+    
     
     UserHandler handle = new UserHandler();
 
@@ -29,8 +30,19 @@ public class RegisterServlet extends HttpServlet {
             throws ServletException, IOException {
         
         
-       
+        
+        
+        
+        
+        
+        
+        
         }
+        
+        
+        
+       
+        
     
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -45,6 +57,10 @@ public class RegisterServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
+        RequestDispatcher rd = request.getRequestDispatcher("RegisterScreen.jsp");
+        rd.forward(request, response);
+        
         
         
         
@@ -62,16 +78,33 @@ public class RegisterServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
         String userName = request.getParameter("username");
         String password = request.getParameter("password");
-        //String email = request.getParameter("email");
-        //String creditCard = request.getParameter("creditcard");
+        String errorMsg = "";
+        boolean error = false;
         
-        handle.createNewUser(userName, password);
+        if (userName == null || password == null || userName.length() == 0 || password.length() == 0) {
+            error = true;
+            errorMsg = "Username and password is required";
+            System.out.println(errorMsg);
+        }
         
-        RequestDispatcher rd = request.getRequestDispatcher("LoginScreen.jsp");
+        
+        if(error){
+        RequestDispatcher rd = request.getRequestDispatcher("RegisterScreen.jsp");
         rd.forward(request, response);
+        }else{
+            handle.createNewUser(userName, password);
+            RequestDispatcher rd = request.getRequestDispatcher("LoginScreen.jsp");
+        rd.forward(request, response);
+        }
+        
     }
+        
+        
+        
+    
 
     /**
      * Returns a short description of the servlet.
