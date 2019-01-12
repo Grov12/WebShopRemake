@@ -83,7 +83,7 @@ public class RegisterServlet extends HttpServlet {
         String password = request.getParameter("password");
         String errorMsg = "";
         boolean error = false;
-        
+        try{
         if (userName == null || password == null || userName.length() == 0 || password.length() == 0) {
             error = true;
             errorMsg = "Username and password is required";
@@ -99,7 +99,15 @@ public class RegisterServlet extends HttpServlet {
             RequestDispatcher rd = request.getRequestDispatcher("LoginScreen.jsp");
         rd.forward(request, response);
         }
+        }
+        catch(NullPointerException e){
+         e.printStackTrace();
+         RequestDispatcher rd = request.getRequestDispatcher("RegisterScreen.jsp");
+         rd.forward(request, response);
+         
+        }
         
+    
     }
         
         

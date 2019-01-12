@@ -68,15 +68,17 @@ public class LoginServlet extends HttpServlet {
         boolean error = false;
         
         
-        boolean checker = handle.authorizeLogin(name, pword);
         
         
         
+        try{
+            boolean checker = handle.authorizeLogin(name, pword);
         if (name == null || pword == null || name.length() == 0 || pword.length() == 0) {
             error = true;
             errorMsg = "Username and password is required";
             System.out.println(errorMsg);
         }
+        
         
         
         
@@ -91,6 +93,12 @@ public class LoginServlet extends HttpServlet {
         }else{
             RequestDispatcher rd = request.getRequestDispatcher("LoginScreen.jsp");
         rd.forward(request, response);
+            
+        }
+        }catch(NullPointerException e){
+            e.printStackTrace();
+            RequestDispatcher rd = request.getRequestDispatcher("LoginScreen.jsp");
+           rd.forward(request, response);
             
         }
         
