@@ -23,23 +23,26 @@
           <th>Product Name</th>
           <th>Price</th>
           <th>Quantity</th>
-          <th>Place in shopping cart</th>
+          
        </tr>
        <c:forEach items="${data}" var="product" >
           <tr>
-             <td>${e.articleID}</td>
-             <td>${e.name}</td>
-             <td>${e.price}</td>
-             <td>${e.quantity}</td>
+             <td>${product[0]}</td>
+             <td>${product[1]}</td>
+             <td>${product[2]}</td>
+             <td>${product[3]}</td>
              <td>
-                <a href="editProduct?code=${product.code}">TODO</a>
+                
              </td>
              <td>
-                <a href="deleteProduct?code=${e.articleID}">BUY</a>
+                <a href="buyProduct?code=${product[0]}">BUY</a>
              </td>
           </tr>
        </c:forEach>
     </table>
+    
+    
+    <h2> Logged in as:  ${name}    </h2>
  
     </body>
 </html>

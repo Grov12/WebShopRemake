@@ -24,11 +24,11 @@ public class LoginServlet extends HttpServlet {
     UserHandler handle = new UserHandler();
     ProductHandler m = new ProductHandler();
 
-    private void sendJSP (HttpServletRequest request, HttpServletResponse response, String name, String pword) 
+    private void sendJSP (HttpServletRequest request, HttpServletResponse response, String name) 
         throws ServletException, IOException{
         
         
-        //request.setAttribute("name", name); //not necessary
+        request.setAttribute("name", name); 
         //request.setAttribute("pword", pword); //Not necessary
         
         List<Object[]> k =  m.getListOfProducts();
@@ -42,6 +42,8 @@ public class LoginServlet extends HttpServlet {
     }
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
+        
         
         
         
@@ -60,19 +62,57 @@ public class LoginServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
-        
-        
-        
         String name = request.getParameter("name");
         String pword = request.getParameter("pword");
-        
-        handle.authorizeLogin(name, pword);
-        
-        sendJSP(request, response, name, pword);
+        String errorMsg = "";
+        boolean error = false;
         
         
-    }
+        
+        
+        
+        try{
+            boolean checker = handle.authorizeLogin(name, pword);
+        if (name == null || pword == null || name.length() == 0 || pword.length() == 0) {
+            error = true;
+            errorMsg = "Username and password is required";
+            System.out.println(errorMsg);
+        }
+        
+        
+        
+        
+        
+        if(error){
+        RequestDispatcher rd = request.getRequestDispatcher("LoginScreen.jsp");
+        rd.forward(request, response);
+        }
+        
+        if(checker == true){
+            sendJSP(request, response, name);
+        }else{
+            RequestDispatcher rd = request.getRequestDispatcher("LoginScreen.jsp");
+        rd.forward(request, response);
+            
+        }
+        }catch(NullPointerException e){
+            e.printStackTrace();
+            RequestDispatcher rd = request.getRequestDispatcher("LoginScreen.jsp");
+           rd.forward(request, response);
+            
+        }
+        
+            
+        
+            
+        }
+        
+        
+        
+        
+        
+        
+    
 
     /**
      * Handles the HTTP <code>POST</code> method.

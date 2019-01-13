@@ -12,17 +12,16 @@
         <title>Create account</title>
     </head>
     <body>
-        <form action="LoginServlet" method="GET">
         
         
-        <h2>Please specify the following down below</h2><br>
-            <b> Userame: </b>  <input name="username" type="text"> <br><br>
-            <b> Password </b>  <input name="password" type="text"> <br><br>
-            <b> Email: </b> <input name="size" type="email"> <br><br>
+    <form method="POST" action="${pageContext.request.contextPath}/RegisterServlet">
+        <h2>Please specify the following down below to register</h2><br>
+            <b> Username: </b>  <input name="username" type="text"> <br><br>
+            <b> Password </b>  <input name="password" type="password"> <br><br>
             
-            <b>Credit Card No:  <input type="text" name="creditcard"/> </b><<br> <br><br>
+            
 
             <input type="submit" value="Create Account" />
-
+    </form>
     </body>
 </html>

@@ -22,25 +22,27 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet(name = "RegisterServlet", urlPatterns = {"/RegisterServlet"})
 public class RegisterServlet extends HttpServlet {
     
+    
     UserHandler handle = new UserHandler();
 
-    private void sendJSP (HttpServletRequest request, HttpServletResponse response, String userName, String password) 
-        throws ServletException, IOException {
-        
-        request.setAttribute("username", userName);
-        request.setAttribute("password", password);
-        //request.setAttribute("email", email);
-        //request.setAttribute("creditcard", creditCard);
-        
-        
-        
-        RequestDispatcher rd = request.getRequestDispatcher("LoginScreen.jsp");
-        rd.forward(request, response);
-    }
+    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-       
+        
+        
+        
+        
+        
+        
+        
+        
+        
         }
+        
+        
+        
+       
+        
     
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -55,16 +57,14 @@ public class RegisterServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
         
-        String userName = request.getParameter("username");
-        String password = request.getParameter("password");
-        //String email = request.getParameter("email");
-        //String creditCard = request.getParameter("creditcard");
+        RequestDispatcher rd = request.getRequestDispatcher("RegisterScreen.jsp");
+        rd.forward(request, response);
         
-        handle.createNewUser(userName, password);
         
-        sendJSP(request, response, userName, password);
+        
+        
+        
     }
 
     /**
@@ -78,8 +78,41 @@ public class RegisterServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        
+        String userName = request.getParameter("username");
+        String password = request.getParameter("password");
+        String errorMsg = "";
+        boolean error = false;
+        try{
+        if (userName == null || password == null || userName.length() == 0 || password.length() == 0) {
+            error = true;
+            errorMsg = "Username and password is required";
+            System.out.println(errorMsg);
+        }
+        
+        
+        if(error){
+        RequestDispatcher rd = request.getRequestDispatcher("RegisterScreen.jsp");
+        rd.forward(request, response);
+        }else{
+            handle.createNewUser(userName, password);
+            RequestDispatcher rd = request.getRequestDispatcher("LoginScreen.jsp");
+        rd.forward(request, response);
+        }
+        }
+        catch(NullPointerException e){
+         e.printStackTrace();
+         RequestDispatcher rd = request.getRequestDispatcher("RegisterScreen.jsp");
+         rd.forward(request, response);
+         
+        }
+        
+    
     }
+        
+        
+        
+    
 
     /**
      * Returns a short description of the servlet.
