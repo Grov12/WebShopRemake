@@ -85,17 +85,18 @@ public class RegisterServlet extends HttpServlet {
         String errorMsg = "";
         boolean error = false;
         try{
-        if (userName == null || password == null || userName.length() == 0 || password.length() == 0) {
+        if (userName == null || password == null || email.length()<1 || userName.length() == 0 || password.length() == 0) {
             error = true;
-            errorMsg = "Username and password is required";
+            errorMsg = "All fields needs to be filled in.";
             System.out.println(errorMsg);
+            
         }
         
         
         if(error){
-        RequestDispatcher rd = request.getRequestDispatcher("RegisterScreen.jsp");
-        rd.forward(request, response);
+        throw new NullPointerException();
         }else{
+            
             handle.createNewUser(userName, password, email);
             RequestDispatcher rd = request.getRequestDispatcher("LoginScreen.jsp");
         rd.forward(request, response);
