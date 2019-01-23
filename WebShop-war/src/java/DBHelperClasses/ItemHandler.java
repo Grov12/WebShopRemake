@@ -22,20 +22,23 @@ public class ItemHandler {
     //after created random index number for order, add an item to that same index.
     public void addItemToOrder(int orderID, String name, int price) {
         ItemEntity item = new ItemEntity(orderID,name,price);
-        daoMethods.openSessionWithTransaction(); 
-       boolean check = daoMethods.checkIfPossible(name);
-       if(check) {
+        daoMethods.openSessionWithTransaction();
+        boolean check = daoMethods.checkIfPossible(name);
+        
+        if(check) {
            daoMethods.persist(item); //saves new value.
            daoMethods.increaseAmountOrder(price,orderID);
            daoMethods.decreaseQuantityFromProducts(name);
            daoMethods.closeSessionWithTransaction();
            System.out.println(name + " was successfully added to order.");
        }
-       
-       else {
+        
+      else {
            daoMethods.closeSessionWithTransaction();
            System.out.println(name + " could not be added.");
        }
+
+       
        
        
      

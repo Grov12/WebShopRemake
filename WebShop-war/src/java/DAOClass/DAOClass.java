@@ -103,7 +103,7 @@ public class DAOClass implements ServiceInterface {
 
     @Override
     public void update(Object entity) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
     }
     
     
@@ -152,6 +152,13 @@ public class DAOClass implements ServiceInterface {
     }
       
       
+       public void increaseQuantityToProducts(String name){
+        Query query = session.createQuery("update ProductEntity set quantity=quantity+1 where name='" + name + "'");
+        int result = query.executeUpdate();
+        System.out.println("Result " + result);
+    }
+      
+      
       public boolean checkIfPossible(String name){
         Query query = session.createQuery("SELECT quantity from ProductEntity where name='" + name +"'");
         int m = (int) query.uniqueResult();
@@ -168,4 +175,28 @@ public class DAOClass implements ServiceInterface {
         
      
     }
+
+      public void deleteUser(String name) {
+          Query query = session.createQuery("DELETE FROM UserEntity where userName='" + name +"'");
+          int result = query.executeUpdate();
+      }
+      
+      public int getPointsFromUser(String name){
+        Query query = session.createQuery("SELECT points from UserEntity where userName='" + name + "'");
+        int pass = (int) query.uniqueResult();
+        
+        return pass;
+        
+        
+    }
+       public String getPassword(String email){
+        Query query = session.createQuery("SELECT password from UserEntity where email='" + email + "'");
+        String pass =(String) query.uniqueResult();
+        
+        return pass;
+        
+        
+    }
+      
+      
 }

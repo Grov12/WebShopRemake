@@ -30,8 +30,7 @@ public class ProductEntity {
     @Column(name = "quantity")
     private int quantity;
 
-    public ProductEntity(int articleID,String name, int price, int quantity) {
-        this.articleID = articleID;
+    public ProductEntity(String name, int price, int quantity) {
         this.name = name;
         this.price = price;
         this.quantity = quantity;

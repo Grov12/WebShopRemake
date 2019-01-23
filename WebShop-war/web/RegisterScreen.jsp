@@ -18,6 +18,7 @@
         <h2>Please specify the following down below to register</h2><br>
             <b> Username: </b>  <input name="username" type="text"> <br><br>
             <b> Password </b>  <input name="password" type="password"> <br><br>
+            <b> Email </b>  <input name="email" type="text"> <br><br>
             
             
 

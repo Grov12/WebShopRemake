@@ -9,14 +9,30 @@
 <!DOCTYPE html>
 <html>
     <head>
+         
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Webshop</title>
     </head>
     <body>
-        <h3>Product List</h3>
+        <div style="background: #cd3700; height: 55px; padding: 5px;">
+  <div style="float: left; padding: 12px; text-align: left">
+    Welcome <b>${name}</b>! You have earned <b>${points}</b> points  
+  </div>
  
+  <div style="float: right; padding: 12px; text-align: right;">
+ 
+      
+     
+     
+   <br/>
+     
+ 
+  </div>
+ 
+</div>
+  
     <p style="color: red;">${errorString}</p>
- 
+  
     <table border="1" cellpadding="5" cellspacing="1" >
        <tr>
           <th>Article No.</th>
@@ -35,15 +51,33 @@
                 
              </td>
              <td>
-                <a href="buyProduct?code=${product[0]}">BUY</a>
+                 
+            
+                  <form action="WebShopServlet" method="POST">
+                  <input type="hidden" name="param2"  value="${product[1]}"></input>
+                  <input type="hidden" name="param3"  value="${product[2]}"></input>
+                  <button type="submit" name="button" value="addCart">Add to cart</button></form>
+                 
+
+            
              </td>
           </tr>
        </c:forEach>
     </table>
+
     
+       <form action="WebShopServlet" method="POST">
+     <button type="submit" name="button" value="Checkout">Checkout</button></form>
+   
+    <br>
+    <br>
+  
+    </body> 
+    ${msgBack} <br><br>
+      <form action="WebShopServlet" method="POST">
+     <button type="submit" name="button" value="button3">Logout</button></form>
     
-    <h2> Logged in as:  ${name}    </h2>
- 
+     
     </body>
 </html>
 

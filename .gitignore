@@ -3,3 +3,6 @@
 /build/
 /WebShop-ejb/dist/
 /WebShop-war/dist/
+/nbproject/private/
+/WebShop-ejb/nbproject/private/
+/dist/

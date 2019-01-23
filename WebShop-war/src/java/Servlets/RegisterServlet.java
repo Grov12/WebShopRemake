@@ -81,6 +81,7 @@ public class RegisterServlet extends HttpServlet {
         
         String userName = request.getParameter("username");
         String password = request.getParameter("password");
+        String email = request.getParameter("email");
         String errorMsg = "";
         boolean error = false;
         try{
@@ -95,7 +96,7 @@ public class RegisterServlet extends HttpServlet {
         RequestDispatcher rd = request.getRequestDispatcher("RegisterScreen.jsp");
         rd.forward(request, response);
         }else{
-            handle.createNewUser(userName, password);
+            handle.createNewUser(userName, password, email);
             RequestDispatcher rd = request.getRequestDispatcher("LoginScreen.jsp");
         rd.forward(request, response);
         }

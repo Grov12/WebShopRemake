@@ -31,12 +31,16 @@ public class UserEntity {
      
       @Column(name = "points")
      private int points;
+      
+     @Column(name = "email")
+     private String email;
      
      
 
-    public UserEntity(String username, String password) {
+    public UserEntity(String username, String password, String email) {
         this.username = username;
         this.password = password;
+        this.email = email;
         points = 0;
       
         

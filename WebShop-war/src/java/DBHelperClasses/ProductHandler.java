@@ -20,6 +20,13 @@ public class ProductHandler {
         daoMethods = new DAOClass();
     }
     
+       public void createNewProduct(String name, int price, int quantity){
+        ProductEntity product = new ProductEntity(name,price,quantity);
+        daoMethods.openSessionWithTransaction();
+        daoMethods.persist(product);
+        daoMethods.closeSessionWithTransaction();
+    }
+    
     
     
     public List getListOfProducts() {
@@ -30,6 +37,24 @@ public class ProductHandler {
        return list;
     }
     
+    public void decreaseProductQuantity(String name){
+        daoMethods.openSessionWithTransaction();
+        daoMethods.decreaseQuantityFromProducts(name);
+        daoMethods.closeSessionWithTransaction();
+    }
+    
+     public void increaseQuantityToProducts(String name){
+        daoMethods.openSessionWithTransaction();
+        daoMethods.increaseQuantityToProducts(name);
+        daoMethods.closeSessionWithTransaction();
+    }
+    
+    public boolean checkIfPossible(String name) {
+        daoMethods.openSession();
+       boolean check = daoMethods.checkIfPossible(name);
+       daoMethods.closeCurrentSession();
+        return check;
+    }
     
     
 }

@@ -13,9 +13,11 @@ import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 
 @WebServlet(name = "LoginServlet", urlPatterns = {"/LoginServlet"})
@@ -23,18 +25,31 @@ public class LoginServlet extends HttpServlet {
     
     UserHandler handle = new UserHandler();
     ProductHandler m = new ProductHandler();
+    
 
     private void sendJSP (HttpServletRequest request, HttpServletResponse response, String name) 
         throws ServletException, IOException{
+        //METHOD NOT IN USE FOR THE MOMENT
+        
+        Cookie username = new Cookie("username",request.getParameter("username"));
+        Cookie email = new Cookie("email", request.getParameter("email"));
         
         
-        request.setAttribute("name", name); 
-        //request.setAttribute("pword", pword); //Not necessary
+        request.setAttribute("name", name);
+        
+        //request.setAttribute("points", points); //Not necessary
         
         List<Object[]> k =  m.getListOfProducts();
         
+        
+        int pp = handle.getPointsFromUser(name);
+        
+        String points = Integer.toString(pp);
+        
          //System.out.println(list[1] + " " + list[2] + " " + list[3]);
+         
          request.setAttribute("data",k);
+         request.setAttribute("points", points);
         
         
         RequestDispatcher rd = request.getRequestDispatcher("WebshopScreen.jsp");
@@ -63,9 +78,15 @@ public class LoginServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String name = request.getParameter("name");
+       
         String pword = request.getParameter("pword");
+        //String points = request.getParameter("points");
         String errorMsg = "";
         boolean error = false;
+        
+        
+        
+      
         
         
         
@@ -73,6 +94,8 @@ public class LoginServlet extends HttpServlet {
         
         try{
             boolean checker = handle.authorizeLogin(name, pword);
+            
+            
         if (name == null || pword == null || name.length() == 0 || pword.length() == 0) {
             error = true;
             errorMsg = "Username and password is required";
@@ -83,22 +106,54 @@ public class LoginServlet extends HttpServlet {
         
         
         
+        
+        
         if(error){
         RequestDispatcher rd = request.getRequestDispatcher("LoginScreen.jsp");
         rd.forward(request, response);
         }
         
-        if(checker == true){
-            sendJSP(request, response, name);
-        }else{
-            RequestDispatcher rd = request.getRequestDispatcher("LoginScreen.jsp");
+        if(checker == true && name.equals("Admin")){
+             RequestDispatcher rd = request.getRequestDispatcher("AdminPage.jsp");
+             rd.forward(request, response);
+        
+        
+        } else if(checker == true && !name.equals("Admin")) {
+            List<Object[]> k =  m.getListOfProducts();
+            int pp = handle.getPointsFromUser(name);
+            String point = Integer.toString(pp);
+            request.setAttribute("data",k);
+            
+            Cookie username = new Cookie("name",name);
+            Cookie points = new Cookie("points", point);
+        
+            username.setMaxAge(60*60*2); 
+            points.setMaxAge(60*60*2);
+            response.addCookie(username);
+            response.addCookie(points);
+            
+            
+            
+            request.setAttribute("name", name);
+            request.setAttribute("points", point);
+            HttpSession session = request.getSession();
+            session.invalidate();
+            
+            RequestDispatcher rd = request.getRequestDispatcher("WebshopScreen.jsp");
+            rd.forward(request, response);
+            
+            //sendJSP(request, response, name);
+        }
+        
+        else{
+        RequestDispatcher rd = request.getRequestDispatcher("LoginScreen.jsp");
         rd.forward(request, response);
             
         }
         }catch(NullPointerException e){
             e.printStackTrace();
             RequestDispatcher rd = request.getRequestDispatcher("LoginScreen.jsp");
-           rd.forward(request, response);
+            rd.forward(request, response);
             
         }
         

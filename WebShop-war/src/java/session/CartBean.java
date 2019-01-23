@@ -11,8 +11,11 @@ import java.util.List;
 import java.util.ArrayList;
 import DBHelperClasses.OrderHandler;
 import DBHelperClasses.ItemHandler;
+import DBHelperClasses.ProductHandler;
 import JavaClasses.Product;
+import SessionBeanInterface.CartInterface;
 import java.util.Random;
+import javax.ejb.Remove;
 
 
 
@@ -21,108 +24,125 @@ import java.util.Random;
  * @author Daniel
  */
 @Stateful
-@LocalBean
-public class CartBean {
+public class CartBean implements CartInterface {
 
     private String customerName;
-    private List<Product> products;
+    List<Product> products = new ArrayList();
     private double totalCost;
     private OrderHandler oh;
     private ItemHandler ih;
-    
-    
-    public void initialize(String customer) throws Exception{
-        if (customer == null){
-            throw new Exception("Null parameter");
-        } else {
-            customerName = customer;
+    ProductHandler pro;
+    List<Object[]> tempList;
+
+    public CartBean() {
+        if(pro == null) {
+        pro = new ProductHandler();
+        tempList = pro.getListOfProducts();
         }
-        products = new ArrayList<>();
-        totalCost = 0;
-        oh = new OrderHandler();
-        ih = new ItemHandler();
     }
     
-    /*
-    public void addProduct(Product product){
-        // To avoid multiple instances of the same product but with different quantities
-        String productName = product.getName();
-        List<String> productNames = new ArrayList<>();
-        for (Product p: products){
-             productNames.add(p.getName());
-        }
-        if (productNames.contains(productName)){
-            int index = productNames.indexOf(productName);
-            products.get(index).increaseQuantity();
-        }
-        else {
-            products.add(product);
-        }
-        totalCost += product.getPrice();
-    }
-    */
     
-    public void addProduct(Product product){
-        products.add(product);
-    }
     
-    public void removeProduct(Product product){
-        products.remove(product);
-    }
     
-    /*
-    public void decreaseQuantity(Product product){
-        String productName = product.getName();
-        List<String> productNames = new ArrayList<>();
-        for (Product p: products){
-             productNames.add(p.getName());
-        }
-        if (productNames.contains(productName)){
-            int index = productNames.indexOf(productName);
-            products.get(index).decreaseQuantity();
-            
-            if (products.get(index).getQuantity() == 0){
-                removeProduct(product);
-            }
-        }
-        totalCost -= product.getPrice();
-    }
-    */
-    
+
+   @Override
     public List getProducts(){
         return products;
     }
     
-    public String cartToString(){
-        String s = "";
-        for (Product p: products){
-            s = s + p.toString() + "\n";
-        }
-        return s;
+    @Override
+    public List getListOfProductsFromDatabase() {
+        return tempList;
     }
     
-    public double getTotalCost(){
-        return totalCost;
+    
+    
+    
+     @Remove
+    @Override
+    public void end() {
+        System.out.println("Cartbean instance will be removed..");
     }
     
-    public String getCustomerName(){
-        return customerName;
+
+
+    @Override
+    public void addToList(Product product) {
+        products.add(product);
+    }
+
+    @Override
+    public void emtptyList() {
+       products.clear();
+    }
+   
+
+    @Override
+    public void removeFromList(Product product) {
+         products.remove(product);
+    }
+
+   
+
+    @Override
+    public double gettotalCost() {
+       return totalCost;
+    }
+
+    @Override
+    public void increaseTotalCost(double c) {
+        totalCost = totalCost + c;
+    }
+
+    @Override
+    public void decreaseTotalCost(double c) {
+       totalCost = totalCost - c;
+    }
+
+    @Override
+    public boolean checkIfPossible(String name) {
+        boolean c = pro.checkIfPossible(name);
+        return c;
     }
     
-    public void setCustomerName(String name){
-        this.customerName = name;
+         @Override
+        public boolean decreaseQuantity(String name) {
+            boolean controller = false;
+            List<Object[]> k =  getListOfProductsFromDatabase();
+            for(Object[] list: k){
+                  if(list[1].equals(name)) {
+                      if(!list[3].equals(0)) {
+                     list[3] = (int) list[3] - 1;
+                     tempList = k;
+                     controller = true;
+                      }
+                      else {
+                          controller = false;
+                      }
+                  }
+     }
+            return controller;
+            
+            
     }
-    
-    public void checkOut(String username, String address, String firstName, String surName){
         
-        Random rng = new Random();
-        int orderID = rng.nextInt(1000000) + 1;
-        int totalPrice = (int) Math.round(totalCost);
-        oh.createNewOrder(orderID, username, 0, address, firstName, surName);
-        
-        for (Product p : products){
-            int productCost = (int) Math.round(p.getPrice());
-            ih.addItemToOrder(orderID, p.getName(), productCost);
-        }
+        @Override
+        public void increaseQuantity(String name) {
+            List<Object[]> k =  getListOfProductsFromDatabase();
+            for(Object[] list: k){
+                  if(list[1].equals(name)) {
+                     list[3] = (int) list[3] + 1;
+                  }
+     }
+            tempList = k;
+            
     }
+
+   
+
+ 
+
+  
+
+   
 }
