@@ -27,34 +27,8 @@ public class LoginServlet extends HttpServlet {
     ProductHandler m = new ProductHandler();
     
 
-    private void sendJSP (HttpServletRequest request, HttpServletResponse response, String name) 
-        throws ServletException, IOException{
-        //METHOD NOT IN USE FOR THE MOMENT
-        
-        Cookie username = new Cookie("username",request.getParameter("username"));
-        Cookie email = new Cookie("email", request.getParameter("email"));
-        
-        
-        request.setAttribute("name", name);
-        
-        //request.setAttribute("points", points); //Not necessary
-        
-        List<Object[]> k =  m.getListOfProducts();
-        
-        
-        int pp = handle.getPointsFromUser(name);
-        
-        String points = Integer.toString(pp);
-        
-         //System.out.println(list[1] + " " + list[2] + " " + list[3]);
-         
-         request.setAttribute("data",k);
-         request.setAttribute("points", points);
-        
-        
-        RequestDispatcher rd = request.getRequestDispatcher("WebshopScreen.jsp");
-        rd.forward(request, response);
-    }
+    
+    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         

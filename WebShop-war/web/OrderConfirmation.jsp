@@ -13,5 +13,7 @@
     </head>
     <body>
         <h1>Your order was successful, you will receive an email.</h1>
+        
+      
     </body>
 </html>

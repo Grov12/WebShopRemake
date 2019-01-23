@@ -10,11 +10,26 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Cart</title>
     </head>
     <body>
-        <h3>Cart</h3>
-          <table border="1" cellpadding="5" cellspacing="1" >
+       
+       
+              <div style="background: #cd3700; height: 55px; padding: 5px;">
+  <div style="float: left; padding: 12px; text-align: center">
+     <h3>Shopping Cart</h3>
+  </div>
+ 
+  <div style="float: right; padding: 12px; text-align: right;">
+    
+   <br/>
+  </div>
+</div>
+        
+          <br><br>
+          
+     
+        <table border="1" cellpadding="5" cellspacing="1" style="background: #D6DBDF;" >
        <tr>
         
           <th>Product Name</th>
@@ -42,19 +57,22 @@
           </tr>
        </c:forEach>
     </table>
-        total cost : ${totalcost}<br>
+        Total cost : ${totalcost}<br>
         <form action="WebShopServlet" method="POST">
+        <br>
         <button type="submit" name="button" value="continueshopping">Continue shopping</button></form> <br>
+        <br><br>
+         _____________________________________________________________________________
         <br><br>
         <form action="WebShopServlet" method="POST">
         <input type="text"  name="firstname" />Firstname <br><br>
         <input type="text"  name="lastname" />Lastname<br><br>
-        <input type="text"  name="address" />address <br><br>
+        <input type="text"  name="address" />Address <br><br>
         <input type="text"  name="email" />E-mail <br><br>
-        <input type="text"  name="creditcard" />creditcard <br><br>
+        <input type="text"  name="creditcard" />Creditcard <br><br>
         <button type="submit" name="button" value="buttonPay">Pay</button></form> <br>
        ${errorMsg}
- 
+         
   
     </body>
 </html>

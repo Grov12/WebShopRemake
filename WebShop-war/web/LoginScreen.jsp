@@ -12,8 +12,9 @@
         <title>Login to Webshop</title>
     </head>
     <body>
+        <div style="background: #cd3700; height: 55px; padding: 5px;"></div>
         <form action="LoginServlet" method="GET">
-        Enter your Username and password to login<br><br>
+        <br><br>
             <b> Username: <input type="text" name="name"/></b><br><br>
             <b>Password:  <input type="password" name="pword"/> </b><br> <br><br>
 
