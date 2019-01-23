@@ -3,7 +3,7 @@
   <services/>
   <clients>
     <client name="BalanceWebservice">
-      <wsdl-url>http://localhost:8080/BalanceWebservice/BalanceWebservice?WSDL</wsdl-url>
+      <wsdl-url>http://localhost:8080/BalanceWebservice/BalanceWebservice?wsdl</wsdl-url>
       <local-wsdl-file>localhost_8080/BalanceWebservice/BalanceWebservice.wsdl</local-wsdl-file>
       <package-name>webservices</package-name>
       <catalog-file>catalog.xml</catalog-file>
@@ -22,7 +22,7 @@
         </wsimport-option>
         <wsimport-option>
           <wsimport-option-name>wsdlLocation</wsimport-option-name>
-          <wsimport-option-value>http://localhost:8080/BalanceWebservice/BalanceWebservice?WSDL</wsimport-option-value>
+          <wsimport-option-value>http://localhost:8080/BalanceWebservice/BalanceWebservice?wsdl</wsimport-option-value>
         </wsimport-option>
         <wsimport-option>
           <wsimport-option-name>xnocompile</wsimport-option-name>
