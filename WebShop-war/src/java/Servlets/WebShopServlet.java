@@ -234,6 +234,7 @@ public class WebShopServlet extends HttpServlet {
                     }
                     s2.addPointsToUser(username);
                     m.emtptyList();
+                    m.decreaseTotalCost(m.gettotalCost());
                     request.getRequestDispatcher("OrderConfirmation.jsp").forward(request, response);
                   } catch(Exception e) {
                       request.setAttribute("data2",listOfAddedItems);

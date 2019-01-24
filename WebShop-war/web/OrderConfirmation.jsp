@@ -13,6 +13,11 @@
     </head>
     <body>
         <h1>Your order was successful, you will receive an email.</h1>
+        <form action="WebShopServlet" method="POST">
+        <button type="submit" name="button" value="continueshopping">Home</button></form> <br>
+        
+      <form action="WebShopServlet" method="POST">
+     <button type="submit" name="button" value="button3">Logout</button></form>
         
       
     </body>

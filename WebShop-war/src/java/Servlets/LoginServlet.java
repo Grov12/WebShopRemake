@@ -52,6 +52,7 @@ public class LoginServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String name = request.getParameter("name");
+         String btn = request.getParameter("button3");
        
         String pword = request.getParameter("pword");
         //String points = request.getParameter("points");
@@ -131,7 +132,7 @@ public class LoginServlet extends HttpServlet {
             
         }
         
-            
+          
         
             
         }
@@ -154,7 +155,7 @@ public class LoginServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+               response.sendRedirect("LoginScreen.jsp");
     }
 
     /**

@@ -14,12 +14,15 @@
     <body>
     <form method="POST" action="${pageContext.request.contextPath}/EmailServlet">
         <h2>Enter e-mail you registered with</h2><br>
-            <b> Email </b>  <input name="email" type="text"> <br><br>
+            <b> Email </b>  <input name="email" type="text"> <br><br> 
          
             
             
 
-            <input type="submit" value="Send" />
+            <input type="submit" value="Send" /><br>
     </form>
+        
+          <form action="LoginServlet" method="POST">
+     <button type="submit" name="button" value="button3">Back</button></form>
     </body>
 </html>
